@@ -13,7 +13,7 @@ export type MainType = {
 }
 
 const Main = (props: MainType) => {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <>
     <View>
@@ -72,13 +72,13 @@ const IconBack = styled.div`
 `
 
 const HeaderText = styled.div`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     background: white;
     margin-left: 8px;
 `
 const ViewPage = styled.div`
-    padding: 20px;
+    padding: 25px;
     background: white;
 `
 

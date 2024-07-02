@@ -5,11 +5,12 @@ import { Button, ContainerInput, Input, Option, Select, TextArea, TextLabel } fr
 import useLocalStorage from "./hooks/useLocalStorage"
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Toast } from "./components/Toas";
 
 export default function Home() {
   const router = useRouter()
-  const [firstName, setFirstName] = useLocalStorage("first_name","");
-  const [lastName, setLastName] = useLocalStorage("last_name","");
+  const [firstName, setFirstName] = useLocalStorage("firstName","");
+  const [lastName, setLastName] = useLocalStorage("lastName","");
   const [loading, setLoading] = useState(false);
   const [biodata, setBiodata] = useLocalStorage("biodata", "");
   const [provinsi, setProvinsi] = useLocalStorage("provinsi", "");
@@ -18,12 +19,60 @@ export default function Home() {
   const [kelurahan, setKelurahan] = useLocalStorage("kelurahan", "")
 
  const submit = (e:any) => {
-  setLoading(true);
+  if(firstName === ""){
+    Toast.fire({
+      icon:"error",
+      title: "Nama depan harus diisi"
+    })
+    return;
+  }
+  if(lastName === ""){
+    Toast.fire({
+      icon:"error",
+      title: "Nama belakang harus diisi"
+    })
+    return;
+  }
+  if(biodata === ""){
+    Toast.fire({
+      icon:"error",
+      title: "Biodata harus diisi"
+    })
+    return;
+  }
+  if(provinsi === ""){
+    Toast.fire({
+      icon:"error",
+      title: "Pilih Provinsi"
+    })
+    return;
+  }
+  if(kota === ""){
+    Toast.fire({
+      icon:"error",
+      title: "Pilih Kota"
+    })
+    return;
+  }
+  if(kecamatan === ""){
+    Toast.fire({
+      icon:"error",
+      title: "Pilih Kecamatan"
+    })
+    return;
+  }
+  if(kelurahan === ""){
+    Toast.fire({
+      icon:"error",
+      title: "Pilih Kelurahan"
+    })
+    return;
+  }
   e.preventDefault();
   const formData = {
-    first_name : firstName,
-    last_name : lastName,
-    biodata: biodata,
+    firstName,
+    lastName,
+    biodata,
     provinsi,
     kota,
     kecamatan,
@@ -32,16 +81,17 @@ export default function Home() {
   localStorage.setItem("user", JSON.stringify(formData));
   const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
   console.log('data detalnya', dataDetail);
-  setFirstName(dataDetail.first_name);
-  setLastName(dataDetail.last_name);
+  setFirstName(dataDetail.firstName);
+  setLastName(dataDetail.lastName);
   setBiodata(dataDetail.biodata);
   setProvinsi(dataDetail?.provinsi);
   setKota(dataDetail?.kota);
   setKecamatan(dataDetail?.kecamatan);
   setKelurahan(dataDetail?.kelurahan);
+  setLoading(true);
   setTimeout(() => {
   router.push('/upload/id', { scroll: false })  
-  }, 1000);
+  }, 2000);
   setLoading(false)
  }
 
@@ -51,7 +101,7 @@ export default function Home() {
  
   return (
     <Main 
-    titleHeader="Informasi Umum"
+    titleHeader="Informasi diri"
     >
       <ContainerInput>
         <TextLabel>Nama Depan</TextLabel>
@@ -81,11 +131,11 @@ export default function Home() {
         value={provinsi}
         onChange={(e)=> setProvinsi(e.target.value)}
         >
-          {/* <Option disabled></Option> */}
-          <Option value="1">Jakarta</Option>
-          <Option value="2">Jawa Barat</Option>
-          <Option value="3">Jawa Tengah</Option>
-          <Option value="4">Jawa Timur</Option>
+          <Option disabled>Pilih Provinsi...</Option>
+          <Option value="jakarta">Jakarta</Option>
+          <Option value="jawa barat">Jawa Barat</Option>
+          <Option value="jawa tengah">Jawa Tengah</Option>
+          <Option value="jawa timur">Jawa Timur</Option>
         </Select>
 
         <TextLabel>Kota</TextLabel>
@@ -93,7 +143,7 @@ export default function Home() {
         value={kota}
         onChange={(e)=> setKota(e.target.value)}
         >
-          {/* <Option disabled></Option> */}
+          <Option disabled>Pilih Kota...</Option>
           <Option value="1">Depok</Option>
           <Option value="2">Bandung</Option>
           <Option value="3">Bogor</Option>
@@ -105,7 +155,7 @@ export default function Home() {
         value={kecamatan}
         onChange={(e)=> setKecamatan(e.target.value)}
         >
-          {/* <Option value={""}></Option> */}
+          <Option disabled>Pilih Kecamatan...</Option>
           <Option value="pancoran">Pancoran</Option>
           <Option value="kalibata">Kalibata</Option>
           <Option value="tebet">Tebet</Option>
@@ -119,7 +169,7 @@ export default function Home() {
         value={kelurahan}
         onChange={(e)=> setKelurahan(e.target.value)}
         >
-          {/* <Option value={""}></Option> */}
+          <Option disabled>Pilih Kelurahan...</Option>
           <Option value="pancoran">Pasar Minggu</Option>
           <Option value="kalibata">Kebon Pedes</Option>
           <Option value="tebet">Kebon Jengkol</Option>
