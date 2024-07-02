@@ -49,11 +49,11 @@ export default Main
 export const View = styled.div<MainType>`
     min-height: 100vh;
     padding-bottom: 80px;
-    /* background: wheat; */
+    background: white;
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid gray;
+    // border: 1px solid gray;
 `
 
 export const Header = styled.div`
@@ -68,13 +68,17 @@ export const Header = styled.div`
 const IconBack = styled.div`
     margin-right: 20px;
     cursor: pointer;
+    background-color: white !important;
 `
 
 const HeaderText = styled.div`
     font-size: 16px;
     font-weight: bold;
+    background: white;
+    margin-left: 8px;
 `
 const ViewPage = styled.div`
-    padding: 20px
+    padding: 20px;
+    background: white;
 `
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerInput = styled.div`
-    /* background-color: red; */
+    background-color: white;
 `;
 
 export const H5Text = styled.h5`
@@ -13,6 +13,7 @@ export const TextLabel = styled(H5Text)`
     font-weight: 700;
     color: #393939;
     margin-bottom: 8px;
+    background-color: white;
 `;
 
 export const Input = styled.input`
@@ -25,6 +26,7 @@ export const Input = styled.input`
     background: #ffffff;
     outline: none;
     padding: 12px;
+    margin-bottom: 12px;
 `;
 
 export const Button = styled.button`
@@ -45,4 +47,27 @@ export const TextArea = styled.textarea`
     background: #ffffff;
     outline: none;
     padding: 12px;
+    min-height: 100px;
+    margin-bottom: 12px;
+`
+
+export const Select = styled.select`
+    border: 1px solid #c4c4c4;
+    box-sizing: border-box;
+    border-radius: 6px;
+    outline: none;
+    padding: 10px;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 12px;
+`
+
+export const Option = styled.option`
+    border: 1px solid #e7e7e7;
+    box-sizing: border-box;
+    border-radius: 6px;
+    outline: none;
+    padding: 10px;
+    min-width: 168px;
+    width: 100%;
 `
