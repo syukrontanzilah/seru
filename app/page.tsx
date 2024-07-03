@@ -38,19 +38,19 @@ export default function Home() {
   const [biodata, setBiodata] = useLocalStorage("biodata", "");
 
   const [provinsi, setProvinsi] = useLocalStorage("provinsi", "");
-  const [provinsiId, setProvinsiId] = useState("")
+  const [provinsiId, setProvinsiId] = useLocalStorage("provinsi_id", "");
   const [dataProvinsi, setDataProvinsi] = useState<ProvinceType[]>([])
 
   const [kota, setKota] = useLocalStorage("kota", "");
-  const [kotaId, setKotaId] = useState("")
+  const [kotaId, setKotaId] = useLocalStorage("kota_id", "");
   const [dataKota, setDataKota] = useState<KotaType[]>([])
 
   const [kecamatan, setKecamatan] = useLocalStorage("kecamatan","");
-  const [kecamatanId, setKecamatanId] = useState("");
+  const [kecamatanId, setKecamatanId] = useLocalStorage("kecamatan_id", "");
   const [datakecamatan, setDataKecamatan] = useState<KecamatanType[]>([])
 
   const [kelurahan, setKelurahan] = useLocalStorage("kelurahan", "");
-  const [kelurahanId, setKelurahanId] = useState("");
+  const [kelurahanId, setKelurahanId] = useLocalStorage("kelurahan_id", "");
   const [dataKelurahan, setDataKelurahan] = useState<KelurahanType[]>([])
 
 
@@ -113,6 +113,10 @@ export default function Home() {
     kota,
     kecamatan,
     kelurahan,
+    provinsi_id: provinsiId,
+    kota_id: kotaId,
+    kecamatan_id: kecamatanId,
+    kelurahan_id: kelurahanId
   }
   localStorage.setItem("user", JSON.stringify(formData));
   const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
@@ -120,9 +124,14 @@ export default function Home() {
   setLastName(dataDetail.lastName);
   setBiodata(dataDetail.biodata);
   setProvinsi(dataDetail?.provinsi);
+  setProvinsiId(dataDetail?.provinsi_id);
   setKota(dataDetail?.kota);
+  setKotaId(dataDetail.kota_id);
   setKecamatan(dataDetail?.kecamatan);
+  setKecamatanId(dataDetail?.kecamatan_id)
   setKelurahan(dataDetail?.kelurahan);
+  setKelurahanId(dataDetail?.kelurahan_id);
+
   setTimeout(() => {
   setLoading(true);
   }, 2000);
@@ -135,7 +144,6 @@ export default function Home() {
   await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
    .then(response => response.json())
    .then(data =>{ 
-      //  console.log("response ==>",data);
        setDataProvinsi(data);
    });
 }
@@ -145,27 +153,24 @@ const getDataKotaKabupaten = async () => {
   await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinsiId}.json`)
   .then(response => response.json())
   .then(data => {
-      console.log("response kab/kota", data)
       setDataKota(data)
   });
 }
 
 // get data kecamatan
 const getDatakecamatan = async() => {
-  fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kotaId}.json`)
+  await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kotaId}.json`)
   .then(response => response.json())
   .then(data => {
-    console.log("response kecamatan", data)
     setDataKecamatan(data)
   });
 }
 
 // get data kelurahan
 const getDataKelurahan = async() => {
-  fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecamatanId}.json`)
+  await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecamatanId}.json`)
 .then(response => response.json())
 .then(data => {
-  console.log('response kelurahan==>', data)
   setDataKelurahan(data)
 });
 }
@@ -288,7 +293,7 @@ const getDataKelurahan = async() => {
           var name = dataKelurahan.filter(function (element) {
             return element.name === e.target.value;
           })[0];
-        setKecamatanId(name.id);
+        setKelurahanId(name.id);
         console.log('kecamatan id', name.id)
         }}
         >

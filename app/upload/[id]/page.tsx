@@ -2,7 +2,7 @@
 import CardHeader from '@/app/components/CardHeader'
 import Main from '@/app/components/Main'
 import useLocalStorage from '@/app/hooks/useLocalStorage'
-import { Button, ButtonFile, ContainerInput, ContainerPhoto, ImageProfile, InputBukti, NoPhoto, TextLabel, ViewImage, ViewUpload } from '@/app/style/HomeStyle'
+import { Button, ButtonFile, ContainerInput, ContainerPhoto, ImageProfile, Input, InputBukti, NoPhoto, TextLabel, ViewImage, ViewUpload } from '@/app/style/HomeStyle'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -21,6 +21,8 @@ const UploadPage = () => {
   const [fileUploadKTP, setFileUploadKTP] = useLocalStorage("file_upload_ktp","");
   const [uploadImagetKTP, setUploadImageKTP] = useLocalStorage("upload_image_ktp", "");
   const [fileNameKTP, setFileNameKTP] = useLocalStorage("file_name_ktp", "");
+
+  const [nomorKTP, setNomorKTP] = useLocalStorage("nomor_ktp", "");
 
   const [fileUploadFree, setFileUploadFree] = useLocalStorage("file_upload_free", "");
   const [uploadImageFree, setUploadImageFree] = useLocalStorage("upload_image_free", "");
@@ -62,6 +64,13 @@ const UploadPage = () => {
       })
       return;
     }
+    if(nomorKTP === ""){
+      Toast.fire({
+        icon:"error",
+        title: "Masukkan nomor KTP"
+      })
+      return;
+    }
     if(fileUploadFree === ""){
       Toast.fire({
         icon:"error",
@@ -83,6 +92,7 @@ const UploadPage = () => {
       file_upload_free : fileUploadFree,
       upload_image_free : uploadImageFree,
       file_name_free: fileNameFree,
+      nomor_ktp: nomorKTP
     }
     localStorage.setItem("user", JSON.stringify(formData));
     const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
@@ -95,6 +105,7 @@ const UploadPage = () => {
     setFileUploadFree(dataDetail?.file_upload_free);
     setUploadImageFree(dataDetail?.upload_image_free);
     setFileNameFree(dataDetail?.file_name_free);
+    setNomorKTP(dataDetail?.nomor_ktp)
     router.push('/result/id', { scroll: true }) 
   }
 
@@ -168,6 +179,14 @@ const UploadPage = () => {
             />
         </ViewUpload>
       </ContainerPhoto>
+
+      <TextLabel>Nomor KTP</TextLabel>
+        <Input
+        type="text"
+        placeholder="Masukkan Nomor KTP"
+        value={nomorKTP}
+        onChange={(e)=> setNomorKTP(e.target.value)}
+        />
 
  {/* upload photo Bebas */}
  <TextLabel>2. Photo Bebas</TextLabel>

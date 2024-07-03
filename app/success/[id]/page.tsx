@@ -3,8 +3,10 @@ import Image from 'next/image'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import ImageSuccess from '../../../public/approve.png'
+import { useRouter } from 'next/navigation'
 
 const SuccessPage = () => {
+  const router = useRouter()
   useEffect(()=> {
     localStorage.clear()
   },[])
@@ -19,6 +21,9 @@ const SuccessPage = () => {
         height={100}
         alt='success'
         />
+        <ButtonHome
+        onClick={() => router.replace('/', { scroll: true }) }
+        >Kembali ke Home</ButtonHome>
     </View>
   )
 }
@@ -46,4 +51,21 @@ const Text = styled.div`
     text-align: center;
     color: #393939;
     font-weight: 600;
+`
+const ButtonHome = styled.div`
+    background-color: darkcyan;
+    color: white;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 100px;
+    padding: 5px 10px;
+    cursor: pointer;
+    &:hover{
+      opacity: 0.8;
+    }
 `

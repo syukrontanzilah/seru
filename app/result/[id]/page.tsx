@@ -24,9 +24,13 @@ const ResultPage = () => {
     const [lastName, setLastName] = useLocalStorage("lastName", "");
     const [biodata, setBiodata] = useLocalStorage("biodata", "");
     const [provinsi, setProvinsi] = useLocalStorage("provinsi", "");
+    const [provinsiId, setProvinsiId] = useLocalStorage("provinsi_id", "");
     const [kota, setKota] = useLocalStorage("kota", "");
+    const [kotaId, setKotaId] = useLocalStorage("kota_id", "");
     const [kecamatan, setKecamatan] = useLocalStorage("kecamatan","");
-    const [kelurahan, setKelurahan] = useLocalStorage("kelurahan", "")
+    const [kecamatanId, setKecamatanId] = useLocalStorage("kecamatan_id", "");
+    const [kelurahan, setKelurahan] = useLocalStorage("kelurahan", "");
+    const [kelurahanId, setKelurahanId] = useLocalStorage("kelurahan_id", "");
     const [fileUpload, setFileUpload] = useLocalStorage("file_upload", "");
     const [uploadImage, setUploadImage] = useLocalStorage("upload_image", "");
     const [fileName, setFileName] = useLocalStorage("file_name", "");
@@ -38,6 +42,8 @@ const ResultPage = () => {
     const [fileUploadFree, setFileUploadFree] = useLocalStorage("file_upload_free", "");
     const [uploadImageFree, setUploadImageFree] = useLocalStorage("upload_image_free", "");
     const [fileNameFree, setFileNameFree] = useLocalStorage("file_name_free", "");
+    const [nomorKTP, setNomorKTP] = useLocalStorage("nomor_ktp", "");
+
 
     const [isUpprove, setIsUpprove] = useLocalStorage("is_upprove", false)
   
@@ -58,6 +64,10 @@ const ResultPage = () => {
         kota,
         kecamatan,
         kelurahan,
+        provinsi_id: provinsiId,
+        kota_id: kotaId,
+        kecamatan_id: kecamatanId,
+        kelurahan_id: kelurahanId,
         file_upload: fileUpload,
         upload_image: uploadImage,
         file_name: fileName,
@@ -69,6 +79,7 @@ const ResultPage = () => {
         file_upload_free : fileUploadFree,
         upload_image_free : uploadImageFree,
         file_name_free: fileNameFree,
+        nomor_ktp: nomorKTP,
         is_upprove: isUpprove,
       }
        localStorage.setItem("user", JSON.stringify(formData));
@@ -99,6 +110,7 @@ const ResultPage = () => {
         <CardContainer>
         <ListImage label='Photo Selfie' image={fileUpload}/>
         <ListImage label='Photo KTP' image={fileUploadKTP}/>
+        <List label='Nomor KTP' title={nomorKTP}/>
         <ListImage label='Photo Bebas' image={fileUploadFree}/>
         </CardContainer>
 
