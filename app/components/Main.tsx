@@ -53,9 +53,7 @@ export const View = styled.div<MainType>`
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
-    // border: 1px solid gray;
 `
-
 export const Header = styled.div`
     background-color: white;
     padding: 25px 20px;
@@ -70,7 +68,6 @@ const IconBack = styled.div`
     cursor: pointer;
     background-color: white !important;
 `
-
 const HeaderText = styled.div`
     font-size: 18px;
     font-weight: bold;

@@ -5,10 +5,12 @@ import ListImage from '@/app/components/ListImage';
 import Main from '@/app/components/Main'
 import { Toast } from '@/app/components/Toas';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
-import { Button, CheckBox, ContainerInput, ImageProfile, TextCheck } from '@/app/style/HomeStyle';
+import { Button, CheckBox, ContainerInput, ImageProfile, TextCheck, ViewCheck } from '@/app/style/HomeStyle';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 const ResultPage = () => {
+    const router = useRouter()
     const [firstName, setFirstName] = useLocalStorage("firstName", "");
     const [lastName, setLastName] = useLocalStorage("lastName", "");
     const [biodata, setBiodata] = useLocalStorage("biodata", "");
@@ -30,9 +32,6 @@ const ResultPage = () => {
 
     const [isUpprove, setIsUpprove] = useLocalStorage("is_upprove", false)
   
-  
-    const [allData, setAllData] = useState([])
-
     const submit = (e:any) => {
       if(isUpprove === false){
         Toast.fire({
@@ -66,15 +65,13 @@ const ResultPage = () => {
        localStorage.setItem("user", JSON.stringify(formData));
        const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
        console.log('data detailnya===>', dataDetail);
-        // console.log('all data', allData)
-      console.log('checked==>', isUpprove)
+       console.log('checked==>', isUpprove)
+       router.push('/success/id', { scroll: true }) 
     }
 
     useEffect(()=> {
-        // const data = JSON.parse(localStorage.getItem("user") || "{}");
-        // setAllData(data)
-        // console.log('all data', data)
       },[])
+
   return (
     <Main 
       iconBack
@@ -95,7 +92,7 @@ const ResultPage = () => {
         <ListImage label='Photo KTP' image={fileUploadKTP}/>
         <ListImage label='Photo Bebas' image={fileUploadFree}/>
 
-        <div>
+        <ViewCheck>
           <CheckBox type="checkbox" 
           id="checkbox" 
           checked={isUpprove}
@@ -103,7 +100,7 @@ const ResultPage = () => {
           defaultChecked={false}
           />
           <TextCheck htmlFor="checkbox">Dengan ini Saya setuju untuk mengirimkan data-data saya</TextCheck>
-        </div>
+        </ViewCheck>
         <Button onClick={(e) => submit(e)}>
         {"Submit"}
       </Button>

@@ -147,6 +147,10 @@ export const ButtonFile = styled.div`
   }
 `;
 
+export const ViewCheck = styled.div`
+    margin-top: 30px;
+`
+
 export const TextCheck = styled.label`
     font-size: 14px;
     background-color: white;
@@ -157,8 +161,4 @@ export const TextCheck = styled.label`
 export const CheckBox = styled.input`
     color: darkcyan;
     margin-right: 10px;
-    border-color: darkcyan;
-    background-color: red;
-    border-radius: 0.15em;
-    margin-right: 0.5em;
 `

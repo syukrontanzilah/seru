@@ -25,16 +25,14 @@ const UploadPage = () => {
   const [uploadImageFree, setUploadImageFree] = useLocalStorage("upload_image_free", "");
   const [fileNameFree, setFileNameFree] = useLocalStorage("file_name_free", "");
 
-
-
   const handleChange = (event: any) => {
     event.persist();
     setFileUpload(URL.createObjectURL(event.target.files[0]));
     setUploadImage(event.target.files[0]);
     setFileName(event.target.files[0].name);
-    console.log('fileupload', fileUpload);
-    console.log('upload image', uploadImage);
-    console.log('file name', fileName)
+    // console.log('fileupload', fileUpload);
+    // console.log('upload image', uploadImage);
+    // console.log('file name', fileName)
   };
 
   const handleChangeKTP = (event: any) => {
@@ -42,9 +40,9 @@ const UploadPage = () => {
     setFileUploadKTP(URL.createObjectURL(event.target.files[0]));
     setUploadImageKTP(event.target.files[0]);
     setFileNameKTP(event.target.files[0].name);
-    console.log('fileupload ktp', fileUploadKTP);
-    console.log('upload image ktp', uploadImagetKTP);
-    console.log('file name ktp', fileNameKTP)
+    // console.log('fileupload ktp', fileUploadKTP);
+    // console.log('upload image ktp', uploadImagetKTP);
+    // console.log('file name ktp', fileNameKTP)
   };
 
   const handleChangeFree = (event: any) => {
@@ -52,9 +50,9 @@ const UploadPage = () => {
     setFileUploadFree(URL.createObjectURL(event.target.files[0]));
     setUploadImageFree(event.target.files[0]);
     setFileNameFree(event.target.files[0].name);
-    console.log('fileupload bebas', fileUploadFree);
-    console.log('upload image bebas', uploadImageFree);
-    console.log('file name bebas', fileNameFree)
+    // console.log('fileupload bebas', fileUploadFree);
+    // console.log('upload image bebas', uploadImageFree);
+    // console.log('file name bebas', fileNameFree)
   };
 
   const submit = (e:any) => {
@@ -96,15 +94,12 @@ const UploadPage = () => {
     }
     localStorage.setItem("user", JSON.stringify(formData));
     const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
-    // console.log('data detalnya', dataDetail);
     setFileUpload(dataDetail?.file_upload);
     setUploadImage(dataDetail?.upload_image);
     setFileName(dataDetail?.file_name);
-
     setFileUploadKTP(dataDetail?.file_upload_ktp);
     setUploadImageKTP(dataDetail?.upload_image_ktp);
     setFileNameKTP(dataDetail?.file_name_ktp);
-
     setFileUploadFree(dataDetail?.file_upload_free);
     setUploadImageFree(dataDetail?.upload_image_free);
     setFileNameFree(dataDetail?.file_name_free);
@@ -193,7 +188,7 @@ const UploadPage = () => {
         <label htmlFor="imgUploadFree">
               <ButtonFile>
                 <TextLabel>
-                 {fileUploadFree ==="" ? "Upload photo KTP": "Ganti photo"}             
+                 {fileUploadFree ==="" ? "Upload photo bebas": "Ganti photo"}             
                  </TextLabel>
               </ButtonFile>
             </label>
