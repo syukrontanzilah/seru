@@ -4,6 +4,15 @@ export const ContainerInput = styled.div`
     background-color: white;
 `;
 
+export const CardContainer = styled.div`
+    background-color: white;
+    border: 1px solid #ece8e8;
+    border-radius: 12px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    margin-bottom: 20px;
+`;
+
 export const H5Text = styled.h5`
     font-size: 12px;
 `;

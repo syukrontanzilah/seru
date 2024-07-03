@@ -81,7 +81,6 @@ export default function Home() {
   }
   localStorage.setItem("user", JSON.stringify(formData));
   const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
-  // console.log('data detalnya', dataDetail);
   setFirstName(dataDetail.firstName);
   setLastName(dataDetail.lastName);
   setBiodata(dataDetail.biodata);
@@ -97,7 +96,6 @@ export default function Home() {
  }
 
   useEffect(()=> {
-    // console.log('loading',loading)
   }, []);
  
   return (

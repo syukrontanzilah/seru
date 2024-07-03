@@ -17,7 +17,7 @@ const Main = (props: MainType) => {
   return (
     <>
     <View>
-        <Header>
+        <Header className='w-full xl:w-[480px]'>
             {
                 props.iconBack && (
                     <>
@@ -48,19 +48,19 @@ export default Main
 
 export const View = styled.div<MainType>`
     min-height: 100vh;
-    padding-bottom: 80px;
     background: white;
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
 `
 export const Header = styled.div`
+    z-index: 10;
     background-color: white;
     padding: 25px 20px;
     display: flex;
     align-items: center;
     z-index: 10;
-    position: relative;
+    position: fixed;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
 `
 const IconBack = styled.div`
@@ -75,7 +75,7 @@ const HeaderText = styled.div`
     margin-left: 8px;
 `
 const ViewPage = styled.div`
-    padding: 25px;
+    padding: 110px 25px 40px 25px;
     background: white;
 `
 

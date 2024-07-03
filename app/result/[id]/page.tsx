@@ -6,7 +6,7 @@ import Main from '@/app/components/Main'
 import { Toast } from '@/app/components/Toas';
 import ZoomImage from '@/app/components/ZoomImage';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
-import { Button, CheckBox, ContainerInput, ImageProfile, TextCheck, ViewCheck } from '@/app/style/HomeStyle';
+import { Button, CardContainer, CheckBox, ContainerInput, ImageProfile, TextCheck, ViewCheck } from '@/app/style/HomeStyle';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
@@ -79,20 +79,21 @@ const ResultPage = () => {
       titleHeader="Result page"
     >
       <CardHeader title="Konfirmasi"/>
-        <ContainerInput>
+        <CardContainer>
         <List label={'Nama Lengkap'} title={`${firstName}  ${lastName}`}/>
         <List label='Biodata' title={biodata}/>
         <List label='Provinsi' title={provinsi}/>
         <List label='Kota' title={kota}/>
         <List label='Kecamatan' title={kecamatan}/>
         <List label='Kelurahan' title={kelurahan}/>
-        </ContainerInput>
+        </CardContainer>
 
-
+        <CardContainer>
         <ListImage label='Photo Selfie' image={fileUpload}/>
         <ListImage label='Photo KTP' image={fileUploadKTP}/>
         <ListImage label='Photo Bebas' image={fileUploadFree}/>
-
+        </CardContainer>
+        
         <ViewCheck>
           <CheckBox type="checkbox" 
           id="checkbox" 
