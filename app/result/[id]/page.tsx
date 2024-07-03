@@ -1,6 +1,7 @@
 "use client"
 import CardHeader from '@/app/components/CardHeader';
 import List from '@/app/components/List';
+import ListImage from '@/app/components/ListImage';
 import Main from '@/app/components/Main'
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 import { Button, ContainerInput, ImageProfile } from '@/app/style/HomeStyle';
@@ -22,6 +23,13 @@ const ResultPage = () => {
     const [uploadImagetKTP, setUploadImageKTP] = useLocalStorage("upload_image_ktp", "");
     const [fileNameKTP, setFileNameKTP] = useLocalStorage("file_name_ktp", "");
   
+    const [fileUploadFree, setFileUploadFree] = useLocalStorage("file_upload_free", "");
+    const [uploadImageFree, setUploadImageFree] = useLocalStorage("upload_image_free", "");
+    const [fileNameFree, setFileNameFree] = useLocalStorage("file_name_free", "");
+
+    const [isUpprove, setIsUpprove] = useLocalStorage("is_upprove", false)
+  
+  
     const [allData, setAllData] = useState([])
 
     const submit = (e:any) => {
@@ -40,7 +48,12 @@ const ResultPage = () => {
 
         file_upload_ktp : fileUploadKTP,
         upload_image_ktp : uploadImagetKTP,
-        file_name_ktp : fileNameKTP
+        file_name_ktp : fileNameKTP,
+
+        file_upload_free : fileUploadFree,
+        upload_image_free : uploadImageFree,
+        file_name_free: fileNameFree,
+        is_upprove: isUpprove,
       }
        localStorage.setItem("user", JSON.stringify(formData));
        const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
@@ -67,12 +80,11 @@ const ResultPage = () => {
         <List label='Kecamatan' title={kecamatan}/>
         <List label='Kelurahan' title={kelurahan}/>
         </ContainerInput>
-        <div>
-        <ImageProfile src={fileUpload} alt="profile" />
-        </div>
-        <div>
-        <ImageProfile src={fileUploadKTP} alt="profile" />
-        </div>
+
+
+        <ListImage label='Photo Selfie' image={fileUpload}/>
+        <ListImage label='Photo KTP' image={fileUploadKTP}/>
+        <ListImage label='Photo Bebas' image={fileUploadFree}/>
 
         <Button onClick={(e) => submit(e)}>
         {"Submit"}

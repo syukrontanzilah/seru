@@ -2,9 +2,12 @@
 import CardHeader from '@/app/components/CardHeader'
 import Main from '@/app/components/Main'
 import useLocalStorage from '@/app/hooks/useLocalStorage'
-import { Button, ButtonFile, ContainerInput, ContainerPhoto, ImageProfile, InputBukti, TextLabel, ViewImage, ViewUpload } from '@/app/style/HomeStyle'
+import { Button, ButtonFile, ContainerInput, ContainerPhoto, ImageProfile, InputBukti, NoPhoto, TextLabel, ViewImage, ViewUpload } from '@/app/style/HomeStyle'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import imageCamera from '../../../public/camera.png';
+import { Toast } from '@/app/components/Toas'
 
 const UploadPage = () => {
   const router = useRouter()
@@ -55,6 +58,27 @@ const UploadPage = () => {
   };
 
   const submit = (e:any) => {
+    if(fileUpload === ""){
+      Toast.fire({
+        icon:"error",
+        title: "Upload Foto selfie dulu"
+      })
+      return;
+    }
+    if(fileUploadKTP === ""){
+      Toast.fire({
+        icon:"error",
+        title: "Upload Foto KTP dulu"
+      })
+      return;
+    }
+    if(fileUploadFree === ""){
+      Toast.fire({
+        icon:"error",
+        title: "Upload Foto bebas dulu"
+      })
+      return;
+    }
     setLoading(true);
     e.preventDefault();
     const formData = {
@@ -84,7 +108,7 @@ const UploadPage = () => {
     setFileUploadFree(dataDetail?.file_upload_free);
     setUploadImageFree(dataDetail?.upload_image_free);
     setFileNameFree(dataDetail?.file_name_free);
-    router.push('/result/id', { scroll: false }) 
+    router.push('/result/id', { scroll: true }) 
   }
 
   useEffect(()=> {
@@ -102,7 +126,9 @@ const UploadPage = () => {
         {fileUpload ? (
               <ImageProfile src={fileUpload} alt="profile" />
             ) : (
-              <div>Tidak ada foto selfie</div>
+              <NoPhoto>
+                <Image src={imageCamera} alt='no-image' width={45} height={45}/>
+              </NoPhoto>
             )}
         </ViewImage>
         <ViewUpload>
@@ -129,7 +155,9 @@ const UploadPage = () => {
         {fileUploadKTP ? (
               <ImageProfile src={fileUploadKTP} alt="profile" />
             ) : (
-              <div>Upload foto KTP</div>
+              <NoPhoto>
+              <Image src={imageCamera} alt='no-image' width={45} height={45}/>
+            </NoPhoto>
             )}
         </ViewImage>
         <ViewUpload>
@@ -156,7 +184,9 @@ const UploadPage = () => {
         {fileUploadFree ? (
               <ImageProfile src={fileUploadFree} alt="profile" />
             ) : (
-              <div>Upload foto KTP</div>
+              <NoPhoto>
+              <Image src={imageCamera} alt='no-image' width={45} height={45}/>
+            </NoPhoto>
             )}
         </ViewImage>
         <ViewUpload>
@@ -176,11 +206,10 @@ const UploadPage = () => {
         </ViewUpload>
       </ContainerPhoto>
 
-
-
-
       </ContainerInput>
-      <Button onClick={(e) => submit(e)}>
+      <Button 
+      onClick={(e) => submit(e)}
+      >
         {"Selanjutnya"}
       </Button>
     </Main>

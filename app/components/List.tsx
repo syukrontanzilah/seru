@@ -30,11 +30,13 @@ const ListView = styled.div`
 const Label = styled.div`
     font-size: 14px;
     background-color: white;
+    color: darkcyan;
+    font-weight: 700;
 
 `
 const Title = styled.div`
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
     color: #393939;
     margin-bottom: 8px;
     background-color: white;

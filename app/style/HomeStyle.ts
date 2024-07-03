@@ -26,7 +26,7 @@ export const Input = styled.input`
     background: #ffffff;
     outline: none;
     padding: 14px;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 `;
 
 export const Button = styled.button`
@@ -104,6 +104,16 @@ export const ImageProfile = styled.img`
   object-fit: cover;
   border: 1px dashed transparent;
 `;
+
+export const NoPhoto = styled.div`
+  width: 100%;
+  height: 250px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.4;
+`
 
 export const ViewUpload = styled.div`
   input {

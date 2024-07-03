@@ -89,10 +89,10 @@ export default function Home() {
   setKota(dataDetail?.kota);
   setKecamatan(dataDetail?.kecamatan);
   setKelurahan(dataDetail?.kelurahan);
-  setLoading(true);
   setTimeout(() => {
-  router.push('/upload/id', { scroll: false })  
+  setLoading(true);
   }, 2000);
+  router.push('/upload/id', { scroll: true })  
   setLoading(false)
  }
 
