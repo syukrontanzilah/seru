@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import imageCamera from '../../../public/camera.png';
 import { Toast } from '@/app/components/Toas'
+import ZoomImage from '@/app/components/ZoomImage'
 
 const UploadPage = () => {
   const router = useRouter()
@@ -119,7 +120,7 @@ const UploadPage = () => {
       <ContainerPhoto>
         <ViewImage>
         {fileUpload ? (
-              <ImageProfile src={fileUpload} alt="profile" />
+              <ZoomImage image={fileUpload} />
             ) : (
               <NoPhoto>
                 <Image src={imageCamera} alt='no-image' width={45} height={45}/>
@@ -148,7 +149,7 @@ const UploadPage = () => {
       <ContainerPhoto>
         <ViewImage>
         {fileUploadKTP ? (
-              <ImageProfile src={fileUploadKTP} alt="profile" />
+              <ZoomImage image={fileUploadKTP} />
             ) : (
               <NoPhoto>
               <Image src={imageCamera} alt='no-image' width={45} height={45}/>
@@ -177,7 +178,7 @@ const UploadPage = () => {
       <ContainerPhoto>
         <ViewImage>
         {fileUploadFree ? (
-              <ImageProfile src={fileUploadFree} alt="profile" />
+              <ZoomImage image={fileUploadFree} />
             ) : (
               <NoPhoto>
               <Image src={imageCamera} alt='no-image' width={45} height={45}/>

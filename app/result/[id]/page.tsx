@@ -4,6 +4,7 @@ import List from '@/app/components/List';
 import ListImage from '@/app/components/ListImage';
 import Main from '@/app/components/Main'
 import { Toast } from '@/app/components/Toas';
+import ZoomImage from '@/app/components/ZoomImage';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
 import { Button, CheckBox, ContainerInput, ImageProfile, TextCheck, ViewCheck } from '@/app/style/HomeStyle';
 import { useRouter } from 'next/navigation';
@@ -104,6 +105,7 @@ const ResultPage = () => {
         <Button onClick={(e) => submit(e)}>
         {"Submit"}
       </Button>
+
         
     </Main>
   )

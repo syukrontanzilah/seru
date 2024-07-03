@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react'
 import styled from 'styled-components';
+import ZoomImage from './ZoomImage';
 
 type ListType = {
     label: string
@@ -12,7 +13,7 @@ const ListImage = (props: ListType) => {
     <ListView>
         <Label>{props.label}</Label>
         <ImageView>
-        <ImageList height={100} width={100} alt='img-list' src={props.image}/>
+        <ZoomImage image={props.image}/>
         </ImageView>
     </ListView>
   )
