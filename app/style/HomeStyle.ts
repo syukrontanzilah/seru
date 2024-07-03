@@ -146,3 +146,19 @@ export const ButtonFile = styled.div`
     color: #454f5b;
   }
 `;
+
+export const TextCheck = styled.label`
+    font-size: 14px;
+    background-color: white;
+    color: darkcyan;
+    font-weight: 700;
+`;
+
+export const CheckBox = styled.input`
+    color: darkcyan;
+    margin-right: 10px;
+    border-color: darkcyan;
+    background-color: red;
+    border-radius: 0.15em;
+    margin-right: 0.5em;
+`

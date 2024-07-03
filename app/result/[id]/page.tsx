@@ -3,8 +3,9 @@ import CardHeader from '@/app/components/CardHeader';
 import List from '@/app/components/List';
 import ListImage from '@/app/components/ListImage';
 import Main from '@/app/components/Main'
+import { Toast } from '@/app/components/Toas';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
-import { Button, ContainerInput, ImageProfile } from '@/app/style/HomeStyle';
+import { Button, CheckBox, ContainerInput, ImageProfile, TextCheck } from '@/app/style/HomeStyle';
 import React, { useEffect, useState } from 'react'
 
 const ResultPage = () => {
@@ -33,6 +34,13 @@ const ResultPage = () => {
     const [allData, setAllData] = useState([])
 
     const submit = (e:any) => {
+      if(isUpprove === false){
+        Toast.fire({
+          icon:"error",
+          title: "Checklist persetujuan dulu"
+        })
+        return;
+      }
        e.preventDefault();
        const formData = {
         firstName,
@@ -59,6 +67,7 @@ const ResultPage = () => {
        const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
        console.log('data detailnya===>', dataDetail);
         // console.log('all data', allData)
+      console.log('checked==>', isUpprove)
     }
 
     useEffect(()=> {
@@ -86,6 +95,15 @@ const ResultPage = () => {
         <ListImage label='Photo KTP' image={fileUploadKTP}/>
         <ListImage label='Photo Bebas' image={fileUploadFree}/>
 
+        <div>
+          <CheckBox type="checkbox" 
+          id="checkbox" 
+          checked={isUpprove}
+          onChange={()=> setIsUpprove(!isUpprove)}
+          defaultChecked={false}
+          />
+          <TextCheck htmlFor="checkbox">Dengan ini Saya setuju untuk mengirimkan data-data saya</TextCheck>
+        </div>
         <Button onClick={(e) => submit(e)}>
         {"Submit"}
       </Button>
