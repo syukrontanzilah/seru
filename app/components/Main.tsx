@@ -58,7 +58,7 @@ export const View = styled.div<MainType>`
 
 export const Header = styled.div`
     background-color: white;
-    padding: 16px;
+    padding: 25px 20px;
     display: flex;
     align-items: center;
     z-index: 10;

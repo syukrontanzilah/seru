@@ -25,17 +25,23 @@ export const Input = styled.input`
     border: 0.815px solid #c4c4c4;
     background: #ffffff;
     outline: none;
-    padding: 12px;
+    padding: 14px;
     margin-bottom: 12px;
 `;
 
 export const Button = styled.button`
     background-color: darkcyan;
     color: white;
-    height : 45px;
-    border-radius: 12px;
+    height : 55px;
+    border-radius: 30px;
     width: 100%;
     font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    transition: .5s;
+    &:hover{
+      opacity: 0.8;
+    }
 `
 export const TextArea = styled.textarea`
     border-radius: 6px;
@@ -47,7 +53,7 @@ export const TextArea = styled.textarea`
     background: #ffffff;
     outline: none;
     padding: 12px;
-    min-height: 100px;
+    min-height: 120px;
     margin-bottom: 12px;
 `
 
@@ -56,7 +62,7 @@ export const Select = styled.select`
     box-sizing: border-box;
     border-radius: 6px;
     outline: none;
-    padding: 10px;
+    padding: 14px;
     width: 100%;
     background-color: white;
     margin-bottom: 12px;
@@ -82,7 +88,7 @@ export const ContainerPhoto = styled.div`
 
 export const ViewImage = styled.div`
   width: 100%;
-  height: 200px;
+  height: 250px;
   margin-bottom: 8px;
   border: 2px dashed #c4cdd5;
   border-radius: 20px;
@@ -93,7 +99,7 @@ export const ViewImage = styled.div`
 
 export const ImageProfile = styled.img`
   width: 100%;
-  height: 200px;
+  height: 250px;
   border-radius: 20px;
   object-fit: cover;
   border: 1px dashed transparent;

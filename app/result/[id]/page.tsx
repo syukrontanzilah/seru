@@ -1,4 +1,5 @@
 "use client"
+import CardHeader from '@/app/components/CardHeader';
 import List from '@/app/components/List';
 import Main from '@/app/components/Main'
 import useLocalStorage from '@/app/hooks/useLocalStorage';
@@ -57,9 +58,9 @@ const ResultPage = () => {
       iconBack
       titleHeader="Result page"
     >
+      <CardHeader title="Konfirmasi"/>
         <ContainerInput>
-        <List label={'Nama depan'} title={firstName}/>
-        <List label= 'Nama belakang' title={lastName}/>
+        <List label={'Nama Lengkap'} title={`${firstName}  ${lastName}`}/>
         <List label='Biodata' title={biodata}/>
         <List label='Provinsi' title={provinsi}/>
         <List label='Kota' title={kota}/>

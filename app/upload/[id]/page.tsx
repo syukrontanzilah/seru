@@ -1,4 +1,5 @@
 "use client"
+import CardHeader from '@/app/components/CardHeader'
 import Main from '@/app/components/Main'
 import useLocalStorage from '@/app/hooks/useLocalStorage'
 import { Button, ButtonFile, ContainerInput, ContainerPhoto, ImageProfile, InputBukti, TextLabel, ViewImage, ViewUpload } from '@/app/style/HomeStyle'
@@ -92,8 +93,8 @@ const UploadPage = () => {
     <Main
       iconBack
       titleHeader="Upload Photo">
+        <CardHeader title="Form KTP"/>
       <ContainerInput>
-
       {/* upload photo selfie */}
       <TextLabel>1. Photo Selfie</TextLabel>
       <ContainerPhoto>

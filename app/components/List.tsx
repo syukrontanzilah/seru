@@ -10,7 +10,12 @@ const List = (props: ListType) => {
   return (
     <ListView>
         <Label>{props.label}</Label>
-        <Title>{props.title}</Title>
+        {
+            props.label === "Biodata" ?
+            <Desc>{props.title}</Desc> :
+            <Title>{props.title}</Title>
+        }
+        
     </ListView>
   )
 }
@@ -19,6 +24,7 @@ export default List;
 
 const ListView = styled.div`
     background-color: white;
+    margin-bottom: 20px;
 `
 
 const Label = styled.div`
@@ -27,6 +33,14 @@ const Label = styled.div`
 
 `
 const Title = styled.div`
+    font-size: 16px;
+    font-weight: 700;
+    color: #393939;
+    margin-bottom: 8px;
+    background-color: white;
+    text-transform: capitalize;
+`
+const Desc = styled.div`
     font-size: 16px;
     font-weight: 700;
     color: #393939;

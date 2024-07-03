@@ -6,6 +6,7 @@ import useLocalStorage from "./hooks/useLocalStorage"
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Toast } from "./components/Toas";
+import CardHeader from "./components/CardHeader";
 
 export default function Home() {
   const router = useRouter()
@@ -101,8 +102,9 @@ export default function Home() {
  
   return (
     <Main 
-    titleHeader="Informasi diri"
+    titleHeader="Informasi Data Diri"
     >
+      <CardHeader title="Form Registrasi"/>
       <ContainerInput>
         <TextLabel>Nama Depan</TextLabel>
         <Input
@@ -123,7 +125,7 @@ export default function Home() {
           placeholder="isi biodata.."
           value={biodata}
           onChange={(e)=> setBiodata(e.target.value)}
-          maxLength={100}
+          maxLength={225}
         />
 
         <TextLabel>Provinsi</TextLabel>
