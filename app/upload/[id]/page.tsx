@@ -31,9 +31,6 @@ const UploadPage = () => {
     setFileUpload(URL.createObjectURL(event.target.files[0]));
     setUploadImage(event.target.files[0]);
     setFileName(event.target.files[0].name);
-    // console.log('fileupload', fileUpload);
-    // console.log('upload image', uploadImage);
-    // console.log('file name', fileName)
   };
 
   const handleChangeKTP = (event: any) => {
@@ -41,9 +38,6 @@ const UploadPage = () => {
     setFileUploadKTP(URL.createObjectURL(event.target.files[0]));
     setUploadImageKTP(event.target.files[0]);
     setFileNameKTP(event.target.files[0].name);
-    // console.log('fileupload ktp', fileUploadKTP);
-    // console.log('upload image ktp', uploadImagetKTP);
-    // console.log('file name ktp', fileNameKTP)
   };
 
   const handleChangeFree = (event: any) => {
@@ -51,9 +45,6 @@ const UploadPage = () => {
     setFileUploadFree(URL.createObjectURL(event.target.files[0]));
     setUploadImageFree(event.target.files[0]);
     setFileNameFree(event.target.files[0].name);
-    // console.log('fileupload bebas', fileUploadFree);
-    // console.log('upload image bebas', uploadImageFree);
-    // console.log('file name bebas', fileNameFree)
   };
 
   const submit = (e:any) => {
@@ -109,6 +100,7 @@ const UploadPage = () => {
 
   useEffect(()=> {
   },[])
+
   return (
     <Main
       iconBack
@@ -123,7 +115,11 @@ const UploadPage = () => {
               <ZoomImage image={fileUpload} />
             ) : (
               <NoPhoto>
-                <Image src={imageCamera} alt='no-image' width={45} height={45}/>
+                <Image 
+                src={imageCamera} 
+                alt='no-image' 
+                width={45} 
+                height={45}/>
               </NoPhoto>
             )}
         </ViewImage>

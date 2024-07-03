@@ -66,12 +66,10 @@ export const Header = styled.div`
 const IconBack = styled.div`
     margin-right: 20px;
     cursor: pointer;
-    background-color: white !important;
 `
 const HeaderText = styled.div`
     font-size: 18px;
     font-weight: bold;
-    background: white;
     margin-left: 8px;
 `
 const ViewPage = styled.div`

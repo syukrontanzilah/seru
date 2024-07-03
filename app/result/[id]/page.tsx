@@ -4,9 +4,17 @@ import List from '@/app/components/List';
 import ListImage from '@/app/components/ListImage';
 import Main from '@/app/components/Main'
 import { Toast } from '@/app/components/Toas';
-import ZoomImage from '@/app/components/ZoomImage';
 import useLocalStorage from '@/app/hooks/useLocalStorage';
-import { Button, CardContainer, CheckBox, ContainerInput, ImageProfile, TextCheck, ViewCheck } from '@/app/style/HomeStyle';
+import { 
+  Button, 
+  CardContainer, 
+  CheckBox, 
+  ContainerInput, 
+  ImageProfile, 
+  TextCheck, 
+  ViewCheck 
+} 
+from '@/app/style/HomeStyle';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
@@ -67,7 +75,7 @@ const ResultPage = () => {
        const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
        console.log('data detailnya===>', dataDetail);
        console.log('checked==>', isUpprove)
-       router.push('/success/id', { scroll: true }) 
+       router.replace('/success/id', { scroll: true }) 
     }
 
     useEffect(()=> {
@@ -80,7 +88,7 @@ const ResultPage = () => {
     >
       <CardHeader title="Konfirmasi"/>
         <CardContainer>
-        <List label={'Nama Lengkap'} title={`${firstName}  ${lastName}`}/>
+        <List label='Nama Lengkap' title={`${firstName}  ${lastName}`}/>
         <List label='Biodata' title={biodata}/>
         <List label='Provinsi' title={provinsi}/>
         <List label='Kota' title={kota}/>
@@ -93,7 +101,7 @@ const ResultPage = () => {
         <ListImage label='Photo KTP' image={fileUploadKTP}/>
         <ListImage label='Photo Bebas' image={fileUploadFree}/>
         </CardContainer>
-        
+
         <ViewCheck>
           <CheckBox type="checkbox" 
           id="checkbox" 
@@ -101,7 +109,9 @@ const ResultPage = () => {
           onChange={()=> setIsUpprove(!isUpprove)}
           defaultChecked={false}
           />
-          <TextCheck htmlFor="checkbox">Dengan ini Saya setuju untuk mengirimkan data-data saya</TextCheck>
+          <TextCheck htmlFor="checkbox">
+            Dengan ini Saya setuju untuk mengirimkan data-data saya
+          </TextCheck>
         </ViewCheck>
         <Button onClick={(e) => submit(e)}>
         {"Submit"}

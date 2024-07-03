@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image";
 import Main from "./components/Main";
 import { Button, ContainerInput, Input, Option, Select, TextArea, TextLabel } from "./style/HomeStyle";
 import useLocalStorage from "./hooks/useLocalStorage"
@@ -8,16 +7,52 @@ import { useRouter } from "next/navigation";
 import { Toast } from "./components/Toas";
 import CardHeader from "./components/CardHeader";
 
+type ProvinceType = {
+  id: string
+  name: string
+}
+
+type KotaType = {
+  id: string
+  province_id: string
+  name: string
+}
+
+type KecamatanType = {
+  id: string
+  regency_id: string
+  name: string
+}
+
+type KelurahanType = {
+  id: string,
+  district_id: string,
+  name: string
+}
+
 export default function Home() {
   const router = useRouter()
   const [firstName, setFirstName] = useLocalStorage("firstName","");
   const [lastName, setLastName] = useLocalStorage("lastName","");
   const [loading, setLoading] = useState(false);
   const [biodata, setBiodata] = useLocalStorage("biodata", "");
+
   const [provinsi, setProvinsi] = useLocalStorage("provinsi", "");
+  const [provinsiId, setProvinsiId] = useState("")
+  const [dataProvinsi, setDataProvinsi] = useState<ProvinceType[]>([])
+
   const [kota, setKota] = useLocalStorage("kota", "");
+  const [kotaId, setKotaId] = useState("")
+  const [dataKota, setDataKota] = useState<KotaType[]>([])
+
   const [kecamatan, setKecamatan] = useLocalStorage("kecamatan","");
-  const [kelurahan, setKelurahan] = useLocalStorage("kelurahan", "")
+  const [kecamatanId, setKecamatanId] = useState("");
+  const [datakecamatan, setDataKecamatan] = useState<KecamatanType[]>([])
+
+  const [kelurahan, setKelurahan] = useLocalStorage("kelurahan", "");
+  const [kelurahanId, setKelurahanId] = useState("");
+  const [dataKelurahan, setDataKelurahan] = useState<KelurahanType[]>([])
+
 
  const submit = (e:any) => {
   if(firstName === ""){
@@ -95,13 +130,63 @@ export default function Home() {
   setLoading(false)
  }
 
+//  get data provinsi
+ const getDataProvinsi = async () => {
+  await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
+   .then(response => response.json())
+   .then(data =>{ 
+      //  console.log("response ==>",data);
+       setDataProvinsi(data);
+   });
+}
+
+// get data kabupaten
+const getDataKotaKabupaten = async () => {
+  await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinsiId}.json`)
+  .then(response => response.json())
+  .then(data => {
+      console.log("response kab/kota", data)
+      setDataKota(data)
+  });
+}
+
+// get data kecamatan
+const getDatakecamatan = async() => {
+  fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kotaId}.json`)
+  .then(response => response.json())
+  .then(data => {
+    console.log("response kecamatan", data)
+    setDataKecamatan(data)
+  });
+}
+
+// get data kelurahan
+const getDataKelurahan = async() => {
+  fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecamatanId}.json`)
+.then(response => response.json())
+.then(data => {
+  console.log('response kelurahan==>', data)
+  setDataKelurahan(data)
+});
+}
+
   useEffect(()=> {
-  }, []);
+    getDataProvinsi()
+    getDataKotaKabupaten()
+    getDatakecamatan()
+    getDataKelurahan()
+  }, [
+    provinsiId, 
+    kotaId, 
+    kecamatanId, 
+    kelurahanId
+  ]);
  
   return (
     <Main 
     titleHeader="Informasi Data Diri"
     >
+      
       <CardHeader title="Form Registrasi"/>
       <ContainerInput>
         <TextLabel>Nama Depan</TextLabel>
@@ -129,51 +214,94 @@ export default function Home() {
         <TextLabel>Provinsi</TextLabel>
         <Select 
         value={provinsi}
-        onChange={(e)=> setProvinsi(e.target.value)}
+        onChange={(e)=> {
+          setProvinsi(e.target.value)
+          var name = dataProvinsi.filter(function (element) {
+              return element.name === e.target.value;
+            })[0];
+          setProvinsiId(name.id);
+      }}
         >
           <Option value={""}>Pilih Provinsi...</Option>
-          <Option value="jakarta">Jakarta</Option>
-          <Option value="jawa barat">Jawa Barat</Option>
-          <Option value="jawa tengah">Jawa Tengah</Option>
-          <Option value="jawa timur">Jawa Timur</Option>
+          {dataProvinsi.map((item, i)=>{
+            return(
+                <Option 
+                key={item.id} 
+                value={item.name}>
+                  {item.name}
+                </Option>
+            )
+        })}
         </Select>
 
-        <TextLabel>Kota</TextLabel>
+        <TextLabel>Kota/Kabupaten</TextLabel>
         <Select 
         value={kota}
-        onChange={(e)=> setKota(e.target.value)}
+        onChange={(e)=> {
+          setKota(e.target.value)
+          var name = dataKota.filter(function (element) {
+              return element.name === e.target.value;
+            })[0];
+          setKotaId(name.id);
+        }}
         >
           <Option value={""}>Pilih Kota...</Option>
-          <Option value="depok">Depok</Option>
-          <Option value="bandung">Bandung</Option>
-          <Option value="bogor">Bogor</Option>
-          <Option value="bekasi">Bekasi</Option>
+          {dataKota.map((item, i)=>{
+            return(
+                <Option 
+                key={item.id} 
+                value={item.name}>
+                  {item.name}
+                </Option>
+            )
+        })}
         </Select>
 
         <TextLabel>Kecamatan</TextLabel>
         <Select 
         value={kecamatan}
-        onChange={(e)=> setKecamatan(e.target.value)}
+        onChange={(e)=> {
+          setKecamatan(e.target.value)
+          var name = datakecamatan.filter(function (element) {
+            return element.name === e.target.value;
+          })[0];
+        setKecamatanId(name.id);
+        }}
         >
           <Option value={""}>Pilih Kecamatan...</Option>
-          <Option value="pancoran">Pancoran</Option>
-          <Option value="kalibata">Kalibata</Option>
-          <Option value="tebet">Tebet</Option>
-          <Option value="kuningan">Kuningan</Option>
-          <Option value="mampang">Mampang Prapatan</Option>
-          <Option value="pasar minggu">Pasar Minggu</Option>
+          {datakecamatan.map((item, i)=>{
+            return(
+                <Option 
+                key={item.id} 
+                value={item.name}>
+                  {item.name}
+                </Option>
+            )
+        })}
         </Select>
 
         <TextLabel>Kelurahan</TextLabel>
         <Select 
         value={kelurahan}
-        onChange={(e)=> setKelurahan(e.target.value)}
+        onChange={(e)=> {
+          setKelurahan(e.target.value)
+          var name = dataKelurahan.filter(function (element) {
+            return element.name === e.target.value;
+          })[0];
+        setKecamatanId(name.id);
+        console.log('kecamatan id', name.id)
+        }}
         >
           <Option value={""}>Pilih Kelurahan...</Option>
-          <Option value="pasar minggu">Pasar Minggu</Option>
-          <Option value="kebon pedes">Kebon Pedes</Option>
-          <Option value="kebon jengkol">Kebon Jengkol</Option>
-          <Option value="rawa buaya">Rawa Buaya</Option>
+          {dataKelurahan.map((item, i)=>{
+            return(
+                <Option 
+                key={item.id} 
+                value={item.name}>
+                  {item.name}
+                </Option>
+            )
+        })}
         </Select>
 
       </ContainerInput>

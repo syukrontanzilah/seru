@@ -1,13 +1,18 @@
 "use client"
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import ImageSuccess from '../../../public/approve.png'
 
 const SuccessPage = () => {
+  useEffect(()=> {
+    localStorage.clear()
+  },[])
   return (
     <View>
-        <Text>Terima kasih datamu berhasil masuk ke sistem kami</Text>
+        <Text>
+          Terima kasih datamu berhasil masuk ke sistem kami
+        </Text>
         <ImageView 
         src= {ImageSuccess} 
         width={100} 
