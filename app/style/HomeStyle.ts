@@ -73,19 +73,19 @@ export const Option = styled.option`
 `
 
 export const ContainerPhoto = styled.div`
-  background-color: pink;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 40px;
 `;
 
 export const ViewImage = styled.div`
   width: 100%;
-  height: auto;
+  height: 200px;
   margin-bottom: 8px;
-  border: 1px dashed #c4cdd5;
-  /* border-radius: 105px; */
+  border: 2px dashed #c4cdd5;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,9 +93,10 @@ export const ViewImage = styled.div`
 
 export const ImageProfile = styled.img`
   width: 100%;
-  height: auto;
-  /* border-radius: 105px; */
+  height: 200px;
+  border-radius: 20px;
   object-fit: cover;
+  border: 1px dashed transparent;
 `;
 
 export const ViewUpload = styled.div`
@@ -117,10 +118,12 @@ export const InputBukti = styled.input`
 export const ButtonFile = styled.div`
   background: #ffffff;
   border-radius: 36px;
-  padding: 7px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   border: 1px solid #dfe3e8;
-
+  padding: 10px 20px 5px 20px;
   p {
     font-weight: bold;
     font-size: 14px;

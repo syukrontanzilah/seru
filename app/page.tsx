@@ -80,7 +80,7 @@ export default function Home() {
   }
   localStorage.setItem("user", JSON.stringify(formData));
   const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
-  console.log('data detalnya', dataDetail);
+  // console.log('data detalnya', dataDetail);
   setFirstName(dataDetail.firstName);
   setLastName(dataDetail.lastName);
   setBiodata(dataDetail.biodata);
@@ -131,7 +131,7 @@ export default function Home() {
         value={provinsi}
         onChange={(e)=> setProvinsi(e.target.value)}
         >
-          <Option disabled>Pilih Provinsi...</Option>
+          <Option value={""}>Pilih Provinsi...</Option>
           <Option value="jakarta">Jakarta</Option>
           <Option value="jawa barat">Jawa Barat</Option>
           <Option value="jawa tengah">Jawa Tengah</Option>
@@ -143,11 +143,11 @@ export default function Home() {
         value={kota}
         onChange={(e)=> setKota(e.target.value)}
         >
-          <Option disabled>Pilih Kota...</Option>
-          <Option value="1">Depok</Option>
-          <Option value="2">Bandung</Option>
-          <Option value="3">Bogor</Option>
-          <Option value="4">Bekasi</Option>
+          <Option value={""}>Pilih Kota...</Option>
+          <Option value="depok">Depok</Option>
+          <Option value="bandung">Bandung</Option>
+          <Option value="bogor">Bogor</Option>
+          <Option value="bekasi">Bekasi</Option>
         </Select>
 
         <TextLabel>Kecamatan</TextLabel>
@@ -155,7 +155,7 @@ export default function Home() {
         value={kecamatan}
         onChange={(e)=> setKecamatan(e.target.value)}
         >
-          <Option disabled>Pilih Kecamatan...</Option>
+          <Option value={""}>Pilih Kecamatan...</Option>
           <Option value="pancoran">Pancoran</Option>
           <Option value="kalibata">Kalibata</Option>
           <Option value="tebet">Tebet</Option>
@@ -169,11 +169,11 @@ export default function Home() {
         value={kelurahan}
         onChange={(e)=> setKelurahan(e.target.value)}
         >
-          <Option disabled>Pilih Kelurahan...</Option>
-          <Option value="pancoran">Pasar Minggu</Option>
-          <Option value="kalibata">Kebon Pedes</Option>
-          <Option value="tebet">Kebon Jengkol</Option>
-          <Option value="kuningan">Rawa Buaya</Option>
+          <Option value={""}>Pilih Kelurahan...</Option>
+          <Option value="pasar minggu">Pasar Minggu</Option>
+          <Option value="kebon pedes">Kebon Pedes</Option>
+          <Option value="kebon jengkol">Kebon Jengkol</Option>
+          <Option value="rawa buaya">Rawa Buaya</Option>
         </Select>
 
       </ContainerInput>

@@ -16,12 +16,34 @@ const ResultPage = () => {
     const [fileUpload, setFileUpload] = useLocalStorage("file_upload", "");
     const [uploadImage, setUploadImage] = useLocalStorage("upload_image", "");
     const [fileName, setFileName] = useLocalStorage("file_name", "");
+
+    const [fileUploadKTP, setFileUploadKTP] = useLocalStorage("file_upload_ktp","");
+    const [uploadImagetKTP, setUploadImageKTP] = useLocalStorage("upload_image_ktp", "");
+    const [fileNameKTP, setFileNameKTP] = useLocalStorage("file_name_ktp", "");
+  
     const [allData, setAllData] = useState([])
 
     const submit = (e:any) => {
        e.preventDefault();
+       const formData = {
+        firstName,
+        lastName,
+        biodata,
+        provinsi,
+        kota,
+        kecamatan,
+        kelurahan,
+        file_upload: fileUpload,
+        upload_image: uploadImage,
+        file_name: fileName,
+
+        file_upload_ktp : fileUploadKTP,
+        upload_image_ktp : uploadImagetKTP,
+        file_name_ktp : fileNameKTP
+      }
+       localStorage.setItem("user", JSON.stringify(formData));
        const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
-       console.log('data detalnya', dataDetail);
+       console.log('data detailnya===>', dataDetail);
         // console.log('all data', allData)
     }
 
@@ -33,7 +55,7 @@ const ResultPage = () => {
   return (
     <Main 
       iconBack
-      titleHeader="Result"
+      titleHeader="Result page"
     >
         <ContainerInput>
         <List label={'Nama depan'} title={firstName}/>
@@ -46,6 +68,9 @@ const ResultPage = () => {
         </ContainerInput>
         <div>
         <ImageProfile src={fileUpload} alt="profile" />
+        </div>
+        <div>
+        <ImageProfile src={fileUploadKTP} alt="profile" />
         </div>
 
         <Button onClick={(e) => submit(e)}>
