@@ -51,7 +51,7 @@ const ResultPage = () => {
       if(isUpprove === false){
         Toast.fire({
           icon:"error",
-          title: "Checklist persetujuan dulu"
+          title: "Checklist persetujuan dulu!"
         })
         return;
       }
@@ -85,7 +85,7 @@ const ResultPage = () => {
        localStorage.setItem("user", JSON.stringify(formData));
        const dataDetail = JSON.parse(localStorage.getItem("user") || "{}")
        console.log('data detailnya===>', dataDetail);
-       console.log('checked==>', isUpprove)
+      //  console.log('checked==>', isUpprove)
        router.replace('/success/id', { scroll: true }) 
     }
 
@@ -108,9 +108,9 @@ const ResultPage = () => {
         </CardContainer>
 
         <CardContainer>
+        <List label='Nomor KTP' title={nomorKTP}/>
         <ListImage label='Photo Selfie' image={fileUpload}/>
         <ListImage label='Photo KTP' image={fileUploadKTP}/>
-        <List label='Nomor KTP' title={nomorKTP}/>
         <ListImage label='Photo Bebas' image={fileUploadFree}/>
         </CardContainer>
 
@@ -122,7 +122,7 @@ const ResultPage = () => {
           defaultChecked={false}
           />
           <TextCheck htmlFor="checkbox">
-            Dengan ini Saya setuju untuk mengirimkan data-data saya
+            Saya sudah membaca <span>syarat & ketentuan</span>, dan dengan ini saya setuju untuk mengirimkan data-data saya
           </TextCheck>
         </ViewCheck>
         <Button onClick={(e) => submit(e)}>

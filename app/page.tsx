@@ -1,6 +1,14 @@
 "use client"
 import Main from "./components/Main";
-import { Button, ContainerInput, Input, Option, Select, TextArea, TextLabel } from "./style/HomeStyle";
+import { 
+  Button, 
+  ContainerInput, 
+  Input, 
+  Option, 
+  Select, 
+  TextArea, 
+  TextLabel 
+} from "./style/HomeStyle";
 import useLocalStorage from "./hooks/useLocalStorage"
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -86,7 +94,7 @@ export default function Home() {
   if(kota === ""){
     Toast.fire({
       icon:"error",
-      title: "Pilih Kota"
+      title: "Pilih Kota/Kabupaten"
     })
     return;
   }
@@ -131,7 +139,6 @@ export default function Home() {
   setKecamatanId(dataDetail?.kecamatan_id)
   setKelurahan(dataDetail?.kelurahan);
   setKelurahanId(dataDetail?.kelurahan_id);
-
   setTimeout(() => {
   setLoading(true);
   }, 2000);
@@ -148,7 +155,7 @@ export default function Home() {
    });
 }
 
-// get data kabupaten
+// get data kota/kabupaten
 const getDataKotaKabupaten = async () => {
   await fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinsiId}.json`)
   .then(response => response.json())
@@ -190,8 +197,7 @@ const getDataKelurahan = async() => {
   return (
     <Main 
     titleHeader="Informasi Data Diri"
-    >
-      
+    >      
       <CardHeader title="Form Registrasi"/>
       <ContainerInput>
         <TextLabel>Nama Depan</TextLabel>
@@ -225,9 +231,9 @@ const getDataKelurahan = async() => {
               return element.name === e.target.value;
             })[0];
           setProvinsiId(name.id);
-      }}
+        }}
         >
-          <Option value={""}>Pilih Provinsi...</Option>
+          <Option value={""} disabled>Pilih Provinsi...</Option>
           {dataProvinsi.map((item, i)=>{
             return(
                 <Option 
@@ -250,7 +256,7 @@ const getDataKelurahan = async() => {
           setKotaId(name.id);
         }}
         >
-          <Option value={""}>Pilih Kota...</Option>
+          <Option value={""} disabled>Pilih Kota/Kabupaten...</Option>
           {dataKota.map((item, i)=>{
             return(
                 <Option 
@@ -273,7 +279,7 @@ const getDataKelurahan = async() => {
         setKecamatanId(name.id);
         }}
         >
-          <Option value={""}>Pilih Kecamatan...</Option>
+          <Option value={""} disabled>Pilih Kecamatan...</Option>
           {datakecamatan.map((item, i)=>{
             return(
                 <Option 
@@ -294,10 +300,10 @@ const getDataKelurahan = async() => {
             return element.name === e.target.value;
           })[0];
         setKelurahanId(name.id);
-        console.log('kecamatan id', name.id)
+        // console.log('kelurahan id', name.id)
         }}
         >
-          <Option value={""}>Pilih Kelurahan...</Option>
+          <Option value={""} disabled>Pilih Kelurahan...</Option>
           {dataKelurahan.map((item, i)=>{
             return(
                 <Option 

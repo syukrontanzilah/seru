@@ -2,7 +2,19 @@
 import CardHeader from '@/app/components/CardHeader'
 import Main from '@/app/components/Main'
 import useLocalStorage from '@/app/hooks/useLocalStorage'
-import { Button, ButtonFile, ContainerInput, ContainerPhoto, ImageProfile, Input, InputBukti, NoPhoto, TextLabel, ViewImage, ViewUpload } from '@/app/style/HomeStyle'
+import { 
+  Button, 
+  ButtonFile, 
+  ContainerInput, 
+  ContainerPhoto, 
+  ImageProfile, 
+  Input, 
+  InputBukti, 
+  NoPhoto, 
+  TextLabel, 
+  ViewImage, 
+  ViewUpload 
+} from '@/app/style/HomeStyle'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -50,6 +62,20 @@ const UploadPage = () => {
   };
 
   const submit = (e:any) => {
+    if(nomorKTP === ""){
+      Toast.fire({
+        icon:"error",
+        title: "Masukkan nomor KTP"
+      })
+      return;
+    }
+    if(nomorKTP?.length > 17){
+      Toast.fire({
+        icon:"error",
+        title: "Masukkan nomor KTP yang valid"
+      })
+      return;
+    }
     if(fileUpload === ""){
       Toast.fire({
         icon:"error",
@@ -64,13 +90,7 @@ const UploadPage = () => {
       })
       return;
     }
-    if(nomorKTP === ""){
-      Toast.fire({
-        icon:"error",
-        title: "Masukkan nomor KTP"
-      })
-      return;
-    }
+
     if(fileUploadFree === ""){
       Toast.fire({
         icon:"error",
@@ -118,8 +138,15 @@ const UploadPage = () => {
       titleHeader="Upload Photo">
         <CardHeader title="Form KTP"/>
       <ContainerInput>
+      <TextLabel>1. Nomor KTP</TextLabel>
+        <Input
+        type="number"
+        placeholder="Masukkan Nomor KTP"
+        value={nomorKTP}
+        onChange={(e)=> setNomorKTP(e.target.value)}
+        />
       {/* upload photo selfie */}
-      <TextLabel>1. Photo Selfie</TextLabel>
+      <TextLabel>2. Photo Selfie</TextLabel>
       <ContainerPhoto>
         <ViewImage>
         {fileUpload ? (
@@ -152,7 +179,7 @@ const UploadPage = () => {
       </ContainerPhoto>
 
       {/* upload photo KTP */}
-      <TextLabel>2. Photo KTP </TextLabel>
+      <TextLabel>3. Photo KTP </TextLabel>
       <ContainerPhoto>
         <ViewImage>
         {fileUploadKTP ? (
@@ -180,16 +207,8 @@ const UploadPage = () => {
         </ViewUpload>
       </ContainerPhoto>
 
-      <TextLabel>Nomor KTP</TextLabel>
-        <Input
-        type="text"
-        placeholder="Masukkan Nomor KTP"
-        value={nomorKTP}
-        onChange={(e)=> setNomorKTP(e.target.value)}
-        />
-
  {/* upload photo Bebas */}
- <TextLabel>2. Photo Bebas</TextLabel>
+ <TextLabel>4. Photo Bebas</TextLabel>
       <ContainerPhoto>
         <ViewImage>
         {fileUploadFree ? (

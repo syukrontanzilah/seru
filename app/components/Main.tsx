@@ -15,7 +15,7 @@ export type MainType = {
 const Main = (props: MainType) => {
   const router = useRouter();
   return (
-    <>
+  <section>
     <View>
         <Header className='w-full xl:w-[480px]'>
             {
@@ -40,7 +40,7 @@ const Main = (props: MainType) => {
         {props.children}    
         </ViewPage>
     </View>
-    </>
+    </section>
   )
 }
 

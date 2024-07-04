@@ -15,6 +15,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-inner-image-zoom": "^3.0.2",
+    "react-select": "^5.8.0",
     "react-zoom-pan-pinch": "^3.6.1",
     "styled-components": "^6.1.11",
     "sweetalert2": "^11.12.1"
